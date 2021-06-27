@@ -1,0 +1,101 @@
+﻿@model AlternativeRealEstateSolution.Models.ViewListsDTO
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <p class="fst-italic">Note, this is User Interface was designed to enable users to interact with the framework. </p>
+        <p class="fst-italic">This is a DEMO applocation.</p>
+    </div>
+</div>
+<hr class="mt-4" style="height: 5px; background-color: #000000; border: none; " />
+    <div class="row shadow">
+    
+    @* view data section *@
+    <div class="col-12">
+        <div class="row">
+            @* users *@
+            <div style="max-height:350px; overflow-y:auto" class="col-4 p-0 w-100">
+                <div class="col-12 sticky-top bg-white shadow-sm font-weight-bold">Users</div>
+                @foreach (var user in Model.Users)
+                {
+                    <div style="margin-bottom:5px !important" class="shadow-sm p-3 mb-5 bg-body rounded w-100 mb-1 row">
+                        <div class="col-7 font-weight-bold">Public Address</div>
+                        <div style="font-size:small; background-color:lightgrey" class="col-12 rounded-3">@user.PublicAddress</div>
+                        <div class="col-3 font-weight-bold">Name</div>
+                        <div class="col-9">@user.FullName</div>
+                        <div class="col-3 font-weight-bold">Email</div>
+                        <div class="col-9">@user.Email</div>
+                        <div class="col-3 font-weight-bold">Ether</div>
+                        <div class="col-9">@user.Ether</div>
+                    </div>
+                }
+            </div>
+            @* properties *@
+            <div style="max-height:350px; overflow-y:auto" class="col-4 p-0 w-100">
+                <div class="col-12 sticky-top bg-white shadow-sm font-weight-bold">Estate Properties</div>
+                @foreach (var estate in Model.Properties)
+                {
+                    <div style="margin-bottom:5px !important" class="shadow-sm p-3 mb-5 bg-body rounded w-100 mb-1 row">
+                        <div class="col-5 font-weight-bold">Description</div>
+                        <div class="col-12">@estate.Description</div>
+                        <div class="col-5 font-weight-bold">Location</div>
+                        <div class="col-12">@estate.GeographicalAddress</div>
+                        <div class="col-5 font-weight-bold">Price</div>
+                        <div class="col-12">@estate.Ether ETH</div>
+                    </div>
+                }
+            </div>
+            @* events *@
+            <div style="max-height:350px; overflow-y:auto" class="col-4 p-0 w-100">
+                <div class="col-12 sticky-top bg-white shadow-sm font-weight-bold">Notifications</div>
+                @foreach (var ev in Model.Events)
+                {
+                    <div style="margin-bottom:5px !important" class="shadow-sm p-3 mb-5 bg-body rounded w-100 mb-1 row">
+                        <div class="col-3 font-weight-bold">User</div>
+                        <div class="col-9">@ev.UserPublicAddress</div>
+                        <div class="col-3 font-weight-bold">Date</div>
+                        <div class="col-9">@ev.TimeStamp</div>
+                        <div class="col-7 font-weight-bold">Context</div>
+                        <div style="font-size:small; background-color:lightgrey" class="col-12 rounded-3">@ev.Message</div>
+                        @*<div class="col-3 font-weight-bold">Ether</div>
+                            <div class="col-9">@ev.</div>*@
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    </div>
+<hr class="mt-4 mb-4" style="height: 5px; background-color: #000000; border: none; " />
+    <div class="row shadow pt-4 pb-4">
+    
+
+
+    <div class="col1-2">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning" onclick="returnToAddPropertyView()">
+            Add Real Estate Company
+        </button>
+
+       
+
+</div>
+
+<script>
+   function returnToAddPropertyView(){
+       const url = "/Home/AddProperty";        
+        $.ajax({
+            type: "POST",
+            url: url,            
+            success: function (msg) {
+                console.log(msg);
+            },
+            error: function (req, status, error) {
+                console.log(error);
+            }
+        });
+   }
+</script>
